@@ -1,6 +1,8 @@
 # Module importieren
 from tkinter import *
 
+import core
+
 # Startwerte festlegen
 GroesseX=800
 GroesseY=600
@@ -9,6 +11,7 @@ Red=(255,0,0)
 # Funktionen definieren
 def OkClick():
     eingabe=eingabeF.get()
+    core.request(eingabe)
     print(eingabe)
 
 # Tkinter vorbereiten
