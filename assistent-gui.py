@@ -16,7 +16,7 @@ def OkClick():
   if eingabe=="":
     print("Bitte gib etwas ein!")
   else:
-    response = core.request(eingabe) # funktion aus core gibt antwort zurück
+    response = core.request(eingabe) # Funktion aus Core gibt Antwort zurück
     print("Else in OkClick ausgeführt")
     nichts2=StringVar()
     nichts2.set("")
