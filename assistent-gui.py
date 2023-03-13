@@ -1,6 +1,6 @@
 # Module importieren
 from tkinter import *
-#import core
+import core
 
 # Startwerte festlegen
 eingabe=0
@@ -16,7 +16,7 @@ def OkClick():
   if eingabe=="":
     print("Bitte gib etwas ein!")
   else:
-    #core.request(eingabe)
+    response = core.request(eingabe) # funktion aus core gibt antwort zurück
     print("Else in OkClick ausgeführt")
     nichts2=StringVar()
     nichts2.set("")
