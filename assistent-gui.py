@@ -1,5 +1,7 @@
 # Module importieren
 from tkinter import *
+import core
+import plugins
 
 # Startwerte festlegen
 GroesseX=800
@@ -8,10 +10,12 @@ Red=(255,0,0)
 
 # Funktionen definieren
 def OkClick():
-    eingabe=eingabeF.get()
-    print(eingabe)
+    r=eingabeF.get()
+    a = core.request(r)
+    print(a)
 def xBClick():
-  pass
+  eingabeF.delete(0, 'end')
+
 # Tkinter vorbereiten
 Fenster=Tk()
 Fenster.configure(background="#FFDE00")
