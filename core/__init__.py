@@ -1,19 +1,23 @@
-verbose = True
+import os
 
-verbose and print("Core importted")
+print("core imported")
 
-if __name__ == "__main__":
-    print("Core is main")
-    import cli
-else:
-    print("Core is not main")
-    import core.cli as cli
 
-def start(env):
-    print("core.start called")
-    if env == "cli":
-        print("Starting CLI...")
-        cli.start()
-    elif env == "gui":
-        print("Starting GUI...")
-        # added later
+def commands(r): # command palette for system commands
+    r == "exit" and exit()
+    if r == "clear" : os.system("clear"); return True
+    if r == "cls" : os.system("cls"); return True
+    if r == "help" : print("See help at: help.md"); return True
+
+os.system("clear") # first clear after import log messages
+
+def loop():
+    while True:
+        request = input(">>> ")
+        #print("You said: " + request)
+        if commands(request): continue
+        print("response")
+
+def request(r):
+    if commands(r): return True
+    print("response")

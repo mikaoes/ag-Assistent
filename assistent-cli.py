@@ -1,2 +1,2 @@
 import core
-core.start(env="cli")
+core.loop()
