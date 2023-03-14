@@ -1,6 +1,7 @@
 # Module importieren
 from tkinter import *
 import core
+import plugins
 
 # Startwerte festlegen
 eingabe=0
