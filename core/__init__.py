@@ -1,25 +1,48 @@
-import os
-
 print("core imported")
 
+import os
+if __name__ == "__main__":
+    print("core is main")
+else:
+    import plugins
 
-def commands(r): # command palette for system commands
+com_list = plugins.command_list()
+
+
+def command_pal(r): # command palette for system commands
     match r:
         case "exit": exit()
         case "clear": os.system("clear"); return True, None
         case "cls": os.system("cls"); return True, None
-        case "help": return True, "See help at help.md"
+        case "help" | "?": return True, "See help at help.md"
         case _: return False, None
+
+def plugin_commands(r): # commands from plugins
+    com, arg = r.split(" ", 1)
+    if com in com_list:
+        return True, (com_list[com](arg))
+    else:
+        return False, None
+
 
 os.system("clear") # first clear after import log messages
 
 def loop():
     while True:
         r = input(">>> ")
-        print(request(r))
+        a = request(r)
+        a != None and print(a)
 
 def request(r):
-    if commands(r)[0]:
-        return commands(r)[1]
+    a = command_pal(r)
+    if a[0]:
+        return a[1]
     else:
-        return "unknown command"
+        ap = plugin_commands(r)
+        if ap[0]:
+            return ap[1]
+        else:
+            return "Command not found."
+    
+if __name__ == "__main__":
+    loop()
