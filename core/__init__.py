@@ -5,8 +5,7 @@ if __name__ == "__main__":
     print("core is main")
 else:
     import plugins
-
-com_list = plugins.command_list()
+    com_list = plugins.command_list()
 
 
 def command_pal(r): # command palette for system commands
@@ -16,6 +15,37 @@ def command_pal(r): # command palette for system commands
         case "cls": os.system("cls"); return True, None
         case "help" | "?": return True, "See help at help.md"
         case _: return False, None
+
+def args(dc, r_split):
+    s = list(dc.keys())[0]
+    s_split = s.split(" ")
+    usc_pos = [i for i, v in enumerate(s_split) if v == "_"]
+    arglist = [v for i, v in enumerate(r_split) if i in usc_pos]
+    print(arglist)
+    return(arglist)
+
+def find_command(r):
+    d = dict()
+    r_split = r.split(" ")
+    for i, v in enumerate(r_split):
+        for j in com_list:
+            j_split = j.split(" ")
+            try:
+                if j_split[i] == v or j_split[i] == "_":
+                    d.update({j: com_list[j]})
+                else:
+                    d.pop(j, "not found")
+            except IndexError:
+                d.pop(j, "not found")
+            
+
+
+    match len(d):
+        case 0: return "Command not found."
+        case 1: return d[list(d.keys())[0]](*args(d, r_split))
+        case _: return "Multiple commands found."
+            
+    
 
 def plugin_commands(r): # commands from plugins
     com, arg = r.split(" ", 1)
@@ -54,3 +84,6 @@ def request(r):
     
 if __name__ == "__main__":
     loop()
+
+print(find_command(input(">>> ")))
+exit()
