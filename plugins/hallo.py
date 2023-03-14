@@ -1,6 +1,4 @@
-class hallo:
-    def __init__(self) -> None:
-        self.commands = [["hallo", greet]]
+def greet(name):
+    return f"Hello, {name}"
 
-def greet():
-    print("Hello world aus hallo.py")
+commands = {"greet": greet}
