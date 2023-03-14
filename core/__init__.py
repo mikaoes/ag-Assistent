@@ -23,5 +23,3 @@ def request(r):
         return commands(r)[1]
     else:
         return "unknown command"
-    
-loop()
