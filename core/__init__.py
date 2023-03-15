@@ -24,7 +24,7 @@ def args(dc, r_split):
     print(arglist)
     return(arglist)
 
-def find_command(r):
+def plugin_commands(r):
     d = dict()
     r_split = r.split(" ")
     for i, v in enumerate(r_split):
@@ -41,18 +41,10 @@ def find_command(r):
 
 
     match len(d):
-        case 0: return "Command not found."
-        case 1: return d[list(d.keys())[0]](*args(d, r_split))
-        case _: return "Multiple commands found."
+        case 0: return False, "Command not found."
+        case 1: return True, d[list(d.keys())[0]](*args(d, r_split))
+        case _: return False, "Multiple commands found."
             
-    
-
-def plugin_commands(r): # commands from plugins
-    com, arg = r.split(" ", 1)
-    if com in com_list:
-        return True, (com_list[com](arg))
-    else:
-        return False, None
 
 
 def commands(r): # command palette for system commands
@@ -84,6 +76,3 @@ def request(r):
     
 if __name__ == "__main__":
     loop()
-
-print(find_command(input(">>> ")))
-exit()
