@@ -14,6 +14,7 @@ def command_pal(r): # command palette for system commands
         case "clear": os.system("clear"); return True, None
         case "cls": os.system("cls"); return True, None
         case "help" | "?": return True, "See help at help.md"
+        case "list" : return True, com_list
         case _: return False, None
 
 def args(dc, r_split):
@@ -21,22 +22,22 @@ def args(dc, r_split):
     s_split = s.split(" ")
     usc_pos = [i for i, v in enumerate(s_split) if v == "_"]
     arglist = [v for i, v in enumerate(r_split) if i in usc_pos]
-    print(arglist)
     return(arglist)
 
 def plugin_commands(r):
-    d = dict()
+    d = com_list.copy()
     r_split = r.split(" ")
     for i, v in enumerate(r_split):
         for j in com_list:
             j_split = j.split(" ")
             try:
-                if j_split[i] == v or j_split[i] == "_":
-                    d.update({j: com_list[j]})
-                else:
-                    d.pop(j, "not found")
+                if j_split[i] != v and j_split[i] != "_":
+                    try:
+                        del d[j]
+                    except KeyError:
+                        None
             except IndexError:
-                d.pop(j, "not found")
+                None
             
 
 
