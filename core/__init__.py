@@ -4,12 +4,8 @@ import os
 import types
 if __name__ == "__main__":
     print("core is main")
-    # import package from sibling directory
     import sys
     sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
-mode = False # mode for app runner
-d_obj = None # object for app runner
 
 import plugins
 com_list = plugins.command_list()
@@ -58,16 +54,12 @@ def plugin_commands(r):
         return ret_bool, ret_str_or_class
 
     match len(d):
-        case 0: return True, "Command not found.1"
-        case 1: return diff_returner()        #True, str(d[list(d.keys())[0]](*args(d, r_split)))
+        case 0: return True, "Command not found."
+        case 1: return diff_returner()
         case _: return True, "Multiple commands found."
             
 
-
-def app_runner(do, r):
-    print(f"recieved {do} and {r} with type {type(r)}")
-
-os.system("clear") # first clear after import log messages
+os.system("clear") # initial clear
 
 def loop():
     while True:
@@ -85,7 +77,6 @@ def request(r):
             return ap[1]
         else:
             return str(ap[1])
-
 
     
 if __name__ == "__main__":
