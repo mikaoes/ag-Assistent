@@ -7,11 +7,15 @@ def gruesse_von_an(von, an):
 class funcApp:
     def __init__(self) -> None:
         self.c = 0
-    def __str__(self) -> str:
+        self.lim = 2
+    def __str__(self): # -> str / 0
         f_name = "f" + str(self.c)
         method = getattr(self, f_name)
         self.c += 1
+        self.c == self.lim and self.reset()
         return str(method())
+    def reset(self):
+        self.c = 0
     def f0(self):
         return "works !!!"
     def f1(self):
