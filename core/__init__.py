@@ -42,20 +42,10 @@ def plugin_commands(r):
                         None
             except IndexError:
                 None
-            
-    def diff_returner() -> tuple[bool, str]:
-        nonlocal d
-        ret_bool, ret_str_or_class = None, None
-        # if d is function / is class
-        if callable(d[list(d.keys())[0]]):
-            ret_bool, ret_str_or_class = True, d[list(d.keys())[0]](*args(d, r_split))
-        else:
-            ret_bool, ret_str_or_class = False, d[list(d.keys())[0]]
-        return ret_bool, ret_str_or_class
 
     match len(d):
         case 0: return True, "Command not found."
-        case 1: return diff_returner()
+        case 1: return d[list( d.keys())[0]](  *args(d, r_split)  )
         case _: return True, "Multiple commands found."
             
 
@@ -72,11 +62,7 @@ def request(r):
     if a[0]: # if is system command
         return a[1]
     else:
-        ap = plugin_commands(r)
-        if ap[0]: # if is command
-            return ap[1]
-        else:
-            return str(ap[1])
+        return plugin_commands(r)
 
     
 if __name__ == "__main__":

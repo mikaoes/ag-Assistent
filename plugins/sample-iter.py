@@ -8,7 +8,7 @@ class funcApp:
     def __init__(self) -> None:
         self.c = 0
         self.lim = 2
-    def __str__(self): # -> str / 0
+    def __call__(self): # -> str / 0
         f_name = "f" + str(self.c)
         method = getattr(self, f_name)
         self.c += 1
