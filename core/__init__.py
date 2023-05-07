@@ -44,9 +44,9 @@ def plugin_commands(r):
                 None
 
     match len(d):
-        case 0: return True, "Command not found."
+        case 0: return "Command not found."
         case 1: return d[list( d.keys())[0]](  *args(d, r_split)  )
-        case _: return True, "Multiple commands found."
+        case _: return "Multiple commands found."
             
 
 os.system("clear") # initial clear
