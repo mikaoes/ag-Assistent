@@ -9,7 +9,7 @@ if __name__ == "__main__":
 
 import plugins
 com_list = plugins.command_list()
-
+running = [False, None] # bool, object
 
 
 def command_pal(r): # command palette for system commands
@@ -25,29 +25,45 @@ def args(dc, r_split):
     s = list(dc.keys())[0]
     s_split = s.split(" ")
     usc_pos = [i for i, v in enumerate(s_split) if v == "_"]
-    arglist = [v for i, v in enumerate(r_split) if i in usc_pos]
+    arglist = [v for i, v in enumerate(r_split) if i in usc_pos or i >= s_split.index("_*_")]
+    print(arglist)
     return(arglist)
 
 def plugin_commands(r):
     d = com_list.copy()
     r_split = r.split(" ")
-    for i, v in enumerate(r_split):
-        for j in com_list:
-            j_split = j.split(" ")
+    for i, v in enumerate(r_split): # split input string and enumerate (index, value)
+        for j in com_list: # iterate through command list
+            j_split = j.split(" ") # split command string
             try:
                 if j_split[i] != v and j_split[i] != "_":
-                    try:
-                        del d[j]
-                    except KeyError:
-                        None
+                    if j_split[-1] == "_*_":
+                        continue
+                    else:
+                        try:
+                            del d[j]
+                        except KeyError:
+                            None
             except IndexError:
                 None
 
+    def class_runner(c):
+        nonlocal d, r_split
+        r = c( args(d, r_split) )
+        if isinstance(c, object):
+            try:
+                global running
+                running[0] = c.running
+                running[1] = c
+            except:
+                None
+        return r
+
     match len(d):
         case 0: return "Command not found."
-        case 1: return d[list( d.keys())[0]](  *args(d, r_split)  )
+        case 1: return class_runner(d[list(d.keys())[0]])
         case _: return "Multiple commands found."
-            
+
 
 os.system("clear") # initial clear
 
@@ -58,11 +74,22 @@ def loop():
         a != None and print(a)
 
 def request(r):
+    global running
     a = command_pal(r)
     if a[0]: # if is system command
         return a[1]
-    else:
-        return plugin_commands(r)
+    elif running[0] == False:
+        plugin_commands(r)
+    elif running[0] == True:
+        c = running[1]
+        ret = c(r.split(" "))
+        if isinstance(c, object):
+            try:
+                running[0] = c.running
+                running[1] = c
+            except:
+                None
+        return ret
 
     
 if __name__ == "__main__":

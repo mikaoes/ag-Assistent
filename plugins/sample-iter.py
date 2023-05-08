@@ -5,10 +5,10 @@ def gruesse_von_an(von, an):
     return f"Grüße von {von} an {an}!"
 
 class funcApp:
-    def __init__(self) -> None:
+    def __init__(self):
         self.c = 0
         self.lim = 2
-    def __call__(self): # -> str / 0
+    def __call__(self):
         f_name = "f" + str(self.c)
         method = getattr(self, f_name)
         self.c += 1
@@ -17,7 +17,7 @@ class funcApp:
     def reset(self):
         self.c = 0
     def f0(self):
-        return "works !!!"
+        return "works"
     def f1(self):
         return "works as well"
         
