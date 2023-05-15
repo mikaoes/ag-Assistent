@@ -25,6 +25,7 @@ def command_pal(r): # command palette for system commands
 def args(dc, r_split):
     s = list(dc.keys())[0]
     s_split = s.split(" ")
+    
     usc_pos = [i for i, v in enumerate(s_split) if v == "_" or v == "_*_"]
     arglist = [v for i, v in enumerate(r_split) if i in usc_pos]
     return(arglist)
@@ -60,6 +61,7 @@ def plugin_commands(r):
         case 0: return "Command not found."
         case 1: return class_runner(d[list(d.keys())[0]])
         case _: return "Multiple commands found."
+
 
 
 os.system("clear") # initial clear
