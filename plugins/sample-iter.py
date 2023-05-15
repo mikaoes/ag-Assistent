@@ -1,10 +1,10 @@
 def greet(name):
-    return f"Hallo {name}!"
+    return f"Hallo {name[0]}!"
 
-def gruesse_von_an(von, an):
-    return f"Grüße von {von} an {an}!"
+def gruesse_von_an(namen):
+    return f"Grüße an {namen[1]} von {namen[0]}!"
 
-class funcApp:
+class wechselApp:
     def __init__(self):
         self.c = 0
         self.lim = 2
@@ -17,9 +17,9 @@ class funcApp:
     def reset(self):
         self.c = 0
     def f0(self):
-        return "works"
+        return "function 1"
     def f1(self):
-        return "works as well"
+        return "function 2"
         
         
 
@@ -27,5 +27,5 @@ class funcApp:
 commands = {
     "greet _": greet,
     "gruesse von _ an _": gruesse_von_an,
-    "funcApp": funcApp()
+    "wechselApp": wechselApp()
     }
