@@ -47,7 +47,10 @@ def plugin_commands(r):
 
     def class_runner(c):
         nonlocal d, r_split
-        r = c( args(d, r_split) )
+        try:
+            r = c( args(d, r_split) )
+        except:
+            r = c()
         if isinstance(c, object):
             try:
                 global running
