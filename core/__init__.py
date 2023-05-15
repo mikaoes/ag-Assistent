@@ -15,6 +15,7 @@ running = [False, None] # bool, object
 def command_pal(r): # command palette for system commands
     match r:
         case "exit": exit()
+        case "close": running[0] = False; return True, None
         case "clear": os.system("clear"); return True, None
         case "cls": os.system("cls"); return True, None
         case "help" | "?": return True, "See help at help.md"
@@ -24,9 +25,9 @@ def command_pal(r): # command palette for system commands
 def args(dc, r_split):
     s = list(dc.keys())[0]
     s_split = s.split(" ")
-    usc_pos = [i for i, v in enumerate(s_split) if v == "_"]
-    arglist = [v for i, v in enumerate(r_split) if i in usc_pos or i >= s_split.index("_*_")]
-    print(arglist)
+    
+    usc_pos = [i for i, v in enumerate(s_split) if v == "_" or v == "_*_"]
+    arglist = [v for i, v in enumerate(r_split) if i in usc_pos]
     return(arglist)
 
 def plugin_commands(r):
@@ -36,14 +37,11 @@ def plugin_commands(r):
         for j in com_list: # iterate through command list
             j_split = j.split(" ") # split command string
             try:
-                if j_split[i] != v and j_split[i] != "_":
-                    if j_split[-1] == "_*_":
-                        continue
-                    else:
-                        try:
-                            del d[j]
-                        except KeyError:
-                            None
+                if j_split[i] != v and j_split[i] != "_" and j_split[i] != "_*_":
+                    try:
+                        del d[j]
+                    except KeyError:
+                        None
             except IndexError:
                 None
 
@@ -65,11 +63,21 @@ def plugin_commands(r):
         case _: return "Multiple commands found."
 
 
+
 os.system("clear") # initial clear
 
 def loop():
     while True:
-        r = input(">>> ")
+        global running
+        input_string = ">>> "
+        if running[0]:
+            try:
+                input_string = f"({running[1].name}) >>> "
+            except:
+                None
+        else:
+            input_string = ">>> "
+        r = input(input_string)
         a = request(r)
         a != None and print(a)
 
@@ -79,7 +87,7 @@ def request(r):
     if a[0]: # if is system command
         return a[1]
     elif running[0] == False:
-        plugin_commands(r)
+        return plugin_commands(r)
     elif running[0] == True:
         c = running[1]
         ret = c(r.split(" "))
