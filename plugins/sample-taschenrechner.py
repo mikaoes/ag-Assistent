@@ -1,30 +1,44 @@
-class rechner:
-    def __init__(self):
-        self.running = True
-        self.name = "Taschenrechner"
+#Modul importieren
+import math
 
-    def __call__(self, arg_list):
-        match len(arg_list):
-            case 3:
-                return self.rechenaufgabe(arg_list)
-    def rechenaufgabe(self, arg_list):
-        vorzeichen = arg_list[1]
-        result = 0.0
-        match vorzeichen:
-            case "+":
-                result = float(arg_list[0]) + float(arg_list[2])
-            case "-":
-                result = float(arg_list[0]) - float(arg_list[2])
-            case "*":
-                result = float(arg_list[0]) * float(arg_list[2])
-            case "/":
-                result = float(arg_list[0]) / float(arg_list[2])
-        return result
-        
+#Rechenarten
+class rechnen:
+    def multi(self, input):
+        return float(input[0]) * float(input[1])
 
+    def potenz(self, input):
+        return float(input[0]) ** float(input[1])
 
-object = rechner()
+    def subtr(self, input):
+        return float(input[0]) - float(input[1])*-
+
+    def addit(self, input):
+        return float(input[0]) + float(input[1])
+
+    def divi(self, input):
+        return float(input[0]) / float(input[1])
+    
+    def qwurzel(self, input):
+        return math.sqrt(input)
+    
+rechner = rechnen()
+
+#commands
 commands = {
-    "rechner _*_": object,
-    "taschenrechner _*_": object
-    }
+            "Rechne _ mal _" : rechner.multi,
+            "Was ist _ mal _" : rechner.multi,
+            "_ mal _" : rechner.multi,
+            "Multipliziere _ und _" : rechner.multi,
+            "Rechne _ hoch _" : rechner.potenz,
+            "Die _ rechner.Potenz von _" : rechner.potenz,
+            "Was ist _ hoch _" : rechner.potenz,
+            "_ hoch _" : rechner.potenz,
+            "Rechne _ minus _" : rechner.subtr,
+            "Was ist _ minus _" : rechner.subtr,
+            "_ minus _" : rechner.subtr,
+            "Subtrahiere _ und _" : rechner.subtr,
+            "_ q^dqw
+            
+            _" : rechner.qwurzel
+}
+
