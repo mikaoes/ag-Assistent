@@ -10,7 +10,7 @@ class rechnen:
         return float(input[0]) ** float(input[1])
 
     def subtr(self, input):
-        return float(input[0]) - float(input[1])*-
+        return float(input[0]) - float(input[1])
 
     def addit(self, input):
         return float(input[0]) + float(input[1])
@@ -37,8 +37,6 @@ commands = {
             "Was ist _ minus _" : rechner.subtr,
             "_ minus _" : rechner.subtr,
             "Subtrahiere _ und _" : rechner.subtr,
-            "_ q^dqw
-            
-            _" : rechner.qwurzel
+            "q _ w" : rechner.qwurzel
 }
 
