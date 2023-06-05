@@ -1,2 +1,2 @@
-erzähl mir einen witzimport core
+import core
 core.loop()
