@@ -20,6 +20,12 @@ class rechnen:
     
     def qwurzel(self, input):
         return math.sqrt(float(input[0]))
+
+    def fakult(self, input):
+        ergebnis = 1
+        for i in range(1, int(input[0])+1):
+            ergebnis = ergebnis * i
+        return ergebnis
     
 rechner = rechnen()
 
@@ -37,6 +43,20 @@ commands = {
             "Was ist _ minus _" : rechner.subtr,
             "_ minus _" : rechner.subtr,
             "Subtrahiere _ und _" : rechner.subtr,
-            "q _ w" : rechner.qwurzel
+            "Ziehe Quadratwurzel von _" : rechner.qwurzel,
+            "Ziehe Wurzel aus _" : rechner.qwurzel,
+            "Mache Wurzel aus _" : rechner.qwurzel,
+            "Ziehe die Quadratwurzel aus _." : rechner.qwurzel,
+            "Was ist die Wurzel von _" : rechner.qwurzel,
+            "Was ist die Wurzel von _?" : rechner.qwurzel,
+            "Was ist die Quadratwurzel von _" : rechner.qwurzel,
+            "Was ist die Quadratwurzel von _?" : rechner.qwurzel,
+            "Berechne Fakultät von _" : rechner.fakult,
+            "Berechne die Fakultät von _." : rechner.fakult,
+            "Was ist die Fakultät von _" : rechner.fakult,
+            "Was ist die Fakultät von _?" : rechner.fakult,
+            "Dividiere _ und _" : rechner.divi,
+            "_ geteilt durch _" : rechner.divi,
+            " Was ist _ geteilt durch _" : rechner.divi
 }
 
