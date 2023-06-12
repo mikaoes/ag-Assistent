@@ -4,3 +4,4 @@ class spiel:
         self.pokebox = []
         self.pokeball = []
         self.trank = []
+commands = {}
