@@ -19,7 +19,7 @@ class rechnen:
         return float(input[0]) / float(input[1])
     
     def qwurzel(self, input):
-        return math.sqrt(input)
+        return math.sqrt(float(input[0]))
     
 rechner = rechnen()
 
